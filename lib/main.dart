@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:school_box/pages/BottomNavi.dart';
-import 'package:school_box/Splash_page.dart';
 import 'package:provider/provider.dart';
 import 'package:school_box/background_color_provider.dart';
+import 'package:school_box/pages/Singup_page.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => BackgroundColorProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -24,21 +26,12 @@ class _MyAppState extends State<MyApp> {
     final backgroundColorProvider =
         Provider.of<BackgroundColorProvider>(context);
 
-    @override
-    void initState() {
-      super.initState();
-      // Fetch color settings from the backend when the screen loads
-
-      backgroundColorProvider.fetchTheme();
-    }
-
     return MaterialApp(
       theme: backgroundColorProvider.isdarkmodechecked
           ? ThemeData.dark(useMaterial3: true)
           : ThemeData.light(useMaterial3: true),
-
-      // home: SplashPage(),  // main route
-      home: const Bottomnavi(),
+      // ignore: prefer_const_constructors
+      home: SignupPage(),
     );
   }
 }

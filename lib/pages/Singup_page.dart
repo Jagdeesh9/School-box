@@ -1,5 +1,8 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:school_box/pages/Otp_Page.dart';
+import 'package:school_box/widgets/textfield.dart';
+import 'package:school_box/widgets/themeButton.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -9,17 +12,47 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  TextEditingController mobileNumberController = TextEditingController();
   bool _isChecked = false;
+
+  void sendOtpHandler() {
+    if (_isChecked) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const OtpPage(),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            "A verification code has been sent to your number",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            "Please agree to the terms before proceeding.",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        color: Colors.white,
+      body: Center(
+        // ignore: avoid_unnecessary_containers
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,26 +77,19 @@ class _SignupPageState extends State<SignupPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
 
                 // Image
-                Container(
-                  child: Image.asset(
-                    'assets/first.jpeg',
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    fit: BoxFit.cover,
-                  ),
+                Image.asset(
+                  'assets/images/first.png',
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 24),
 
                 // Input Field with Mobile Icon
-                TextField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a mobile number',
-                    prefixIcon: Icon(Icons.mobile_screen_share_outlined),
-                  ),
-                  keyboardType: TextInputType.phone,
+                Textfield(
+                  hintText: 'Enter mobile number here',
+                  controller: mobileNumberController,
+                  icon: const Icon(Icons.mobile_screen_share),
                 ),
                 const SizedBox(height: 16),
 
@@ -80,8 +106,8 @@ class _SignupPageState extends State<SignupPage> {
                         });
                       },
                     ),
-                    Expanded(
-                      child: const Text(
+                    const Expanded(
+                      child: Text(
                         'By continuing, I agree to the Terms of Use & Privacy Policy.',
                         style: TextStyle(
                           color: Colors.black,
@@ -94,54 +120,9 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 16),
 
                 // Send OTP Button
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade600,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      if (_isChecked) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const OtpPage(),
-                          ),
-                        );
-                         ScaffoldMessenger.of(context).showSnackBar(
-                          
-                          const SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text(
-                              "A verification code has been sent to your number",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          
-                          const SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text(
-                              "Please agree to the terms before proceeding.",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text(
-                      'Send OTP',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                Themebutton(
+                  onpressHandler: sendOtpHandler,
+                  text: 'Sent OTP',
                 ),
                 const SizedBox(height: 16),
 
@@ -173,4 +154,3 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
-
