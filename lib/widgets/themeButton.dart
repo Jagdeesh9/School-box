@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:school_box/colors.dart';
 
 class Themebutton extends StatefulWidget {
   final Function() onpressHandler;
@@ -18,13 +17,6 @@ class _ThemebuttonState extends State<Themebutton> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: widget.onpressHandler,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Pallete.themeBottonColor,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
-        ),
         child: Text(
           widget.text,
           style: const TextStyle(
