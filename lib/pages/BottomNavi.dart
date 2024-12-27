@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:school_box/colors.dart';
 import 'package:school_box/pages/main/Account.dart';
 import 'package:school_box/pages/main/Help.dart';
 import 'package:school_box/pages/main/Home_page.dart';
 import 'package:school_box/pages/main/Subscription.dart';
-import 'package:provider/provider.dart';
-import 'package:school_box/background_color_provider.dart';
 
 class Bottomnavi extends StatefulWidget {
   const Bottomnavi({super.key});
@@ -21,74 +20,51 @@ class _BottomnaviState extends State<Bottomnavi> {
     const HomePage(),
     const Subscription(),
     const Help(),
-    const Account()
+    const Account(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColorProvider =
-        Provider.of<BackgroundColorProvider>(context);
-          final lightBackgroundColor = Colors.white;
-    final darkBackgroundColor = Colors.black;
-    final lightTextColor = Colors.black;
-    final darkTextColor = Colors.white;
-
-
-    return Scaffold(
-      bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: backgroundColorProvider.isdarkmodechecked
-                ? darkBackgroundColor
-                : lightBackgroundColor, 
-          ),
-
-          
-          child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+    return Column(
+      children: [
+        Expanded(
+          child: _screens[_currentIndex], // Display the selected screen
         ),
-        child: BottomNavigationBar(
-          // backgroundColor: Colors.red,
-          selectedItemColor: Colors.blue,
+        BottomNavigationBar(
+          selectedItemColor: Colors.black,
           unselectedItemColor: Colors.black,
-          iconSize: 35,
-          selectedFontSize: 15,
-          unselectedFontSize: 18,
+          iconSize: 25,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
               _currentIndex = index;
             });
           },
-          items: const [
-            BottomNavigationBarItem(
-              backgroundColor: Colors.red,
-              icon: Icon(
-                Icons.home,
-                // size: 30,
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Colors.red,
-              icon: Icon(Icons.view_list_rounded),
-              label: 'My Subscriptions',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Colors.red,
-              icon: Icon(Icons.help_outline),
-              label: 'Help Desk',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Colors.red,
-              icon: Icon(Icons.account_circle_outlined),
-              label: 'Account',
-            ),
+          items: [
+            _buildBottomNavItem(Icons.home, "Home", 0),
+            _buildBottomNavItem(Icons.view_list_rounded, "My Subscriptions", 1),
+            _buildBottomNavItem(Icons.help_outline, "Help Desk", 2),
+            _buildBottomNavItem(Icons.account_circle_outlined, "Account", 3),
           ],
         ),
-      )),
-      body: _screens[_currentIndex],
+      ],
+    );
+  }
+
+  // Helper function to build BottomNavigationBarItem with white box for selected icon
+  BottomNavigationBarItem _buildBottomNavItem(
+      IconData icon, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: Container(
+        decoration: BoxDecoration(
+          color: _currentIndex == index ? Colors.white : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        padding: const EdgeInsets.all(5), // Add padding for the white box
+        child: Icon(icon,
+            color: _currentIndex == index ? Colors.red : Colors.black),
+      ),
+      label: label,
     );
   }
 }
