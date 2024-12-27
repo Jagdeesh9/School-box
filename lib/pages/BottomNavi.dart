@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:school_box/colors.dart';
 import 'package:school_box/pages/main/Account.dart';
 import 'package:school_box/pages/main/Help.dart';
 import 'package:school_box/pages/main/Home_page.dart';
@@ -20,34 +19,30 @@ class _BottomnaviState extends State<Bottomnavi> {
     const HomePage(),
     const Subscription(),
     const Help(),
-    const Account(),
+    const Account()
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: _screens[_currentIndex], // Display the selected screen
-        ),
-        BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black,
-          iconSize: 25,
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: [
-            _buildBottomNavItem(Icons.home, "Home", 0),
-            _buildBottomNavItem(Icons.view_list_rounded, "My Subscriptions", 1),
-            _buildBottomNavItem(Icons.help_outline, "Help Desk", 2),
-            _buildBottomNavItem(Icons.account_circle_outlined, "Account", 3),
-          ],
-        ),
-      ],
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        iconSize: 25,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          _buildBottomNavItem(Icons.home, "Home", 0),
+          _buildBottomNavItem(Icons.view_list_rounded, "My Subscriptions", 1),
+          _buildBottomNavItem(Icons.help_outline, "Help Desk", 2),
+          _buildBottomNavItem(Icons.account_circle_outlined, "Account", 3),
+        ],
+      ),
+      body: _screens[_currentIndex],
     );
   }
 

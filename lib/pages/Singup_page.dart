@@ -28,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
           backgroundColor: Colors.red,
           content: Text(
             "A verification code has been sent to your number",
-            style: TextStyle(color: Colors.white),
+            // style: TextStyle(color: Colors.white),
           ),
         ),
       );
@@ -58,25 +58,13 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Header
-                const Text(
-                  'SIGNUP',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('SIGNUP',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: 1),
-                const Text(
-                  'New here? Register your account today.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('New here? Register your account today.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleSmall),
 
                 // Image
                 Image.asset(
@@ -106,14 +94,10 @@ class _SignupPageState extends State<SignupPage> {
                         });
                       },
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'By continuing, I agree to the Terms of Use & Privacy Policy.',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
-                      ),
+                          'By continuing, I agree to the Terms of Use & Privacy Policy.',
+                          style: Theme.of(context).textTheme.bodySmall),
                     ),
                   ],
                 ),
