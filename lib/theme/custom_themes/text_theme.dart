@@ -23,12 +23,14 @@ class AppTextTheme {
     bodySmall: const TextStyle().copyWith(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
+        // ignore: deprecated_member_use
         color: Colors.black.withOpacity(0.5)),
     labelLarge: const TextStyle().copyWith(
         fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.black),
     labelMedium: const TextStyle().copyWith(
         fontSize: 12.0,
         fontWeight: FontWeight.normal,
+        // ignore: deprecated_member_use
         color: Colors.black.withOpacity(0.5)),
   );
 
@@ -52,12 +54,14 @@ class AppTextTheme {
     bodySmall: const TextStyle().copyWith(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
+        // ignore: deprecated_member_use
         color: Colors.white.withOpacity(0.5)),
     labelLarge: const TextStyle().copyWith(
         fontSize: 12.0, fontWeight: FontWeight.normal, color: Colors.white),
     labelMedium: const TextStyle().copyWith(
         fontSize: 12.0,
         fontWeight: FontWeight.normal,
+        // ignore: deprecated_member_use
         color: Colors.white.withOpacity(0.5)),
   );
 }
