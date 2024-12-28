@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:school_box/pages/Singup_page.dart';
 import 'package:school_box/pages/bottomNavi.dart';
 import 'package:school_box/theme/theme.dart';
 

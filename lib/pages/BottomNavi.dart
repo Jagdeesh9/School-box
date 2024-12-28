@@ -12,7 +12,7 @@ class Bottomnavi extends StatefulWidget {
 }
 
 class _BottomnaviState extends State<Bottomnavi> {
-  int _currentIndex = 2;
+  int _currentIndex = 0;
 
   // List of screens for each BottomNavigationBar item
   final List<Widget> _screens = [

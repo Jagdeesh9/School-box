@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Themebutton extends StatefulWidget {
-  final Function() onpressHandler;
+  void Function() onpressHandler;
+  // ignore: prefer_typing_uninitialized_variables
   final text;
-  const Themebutton(
-      {super.key, required this.onpressHandler, required this.text});
+  Themebutton({super.key, required this.onpressHandler, required this.text});
 
   @override
   State<Themebutton> createState() => _ThemebuttonState();
