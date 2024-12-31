@@ -20,7 +20,7 @@ class _SubscriptionState extends State<Subscription> {
         appBar: AppBar(
           title: Center(
             child: Text(
-              'Subscription Details',
+              'My Subscriptions ',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
@@ -88,7 +88,7 @@ class _SubscriptionState extends State<Subscription> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                // Handle view button press
+                                _showBottomSheet(context);
                               },
                               style: ElevatedButton.styleFrom(
                                 // iconColor: AppColors.redBackground,
@@ -217,6 +217,94 @@ class _SubscriptionState extends State<Subscription> {
             ],
           )),
         ));
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Pause Subscription',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 2,
+                  // margin: EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    // borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Card(
+                  elevation: 3.0,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'From',
+                      hintText: 'dd/mm/yyyy',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Card(
+                  elevation: 3.0,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Up To',
+                      hintText: 'dd/mm/yyyy',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                // SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    // margin: EdgeInsets.all(10),
+                    width: 500,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: AppColors.redBackground,
+                        borderRadius: BorderRadius.circular(25)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Handle pause subscription logic
+                      },
+                      child: Text('Pause Now'),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Center(
+                  child: Text(
+                    'Terms & Conditions',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                Text(
+                    'If you want to pause your subscription, please select start date and end date. In case you did not decide your end date, select the "Decide later" option.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge)
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildRow(String label, String value, {TextStyle? valueStyle}) {
