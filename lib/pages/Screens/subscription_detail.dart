@@ -222,16 +222,15 @@ class _Subscription_DetailState extends State<Subscription_Detail> {
                                       EdgeInsets.symmetric(horizontal: 4.0),
                                   child: TextField(
                                     decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: 'Enter a pin code',
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium,
-                                            hintStyle:  Theme.of(context)
-                                            .textTheme
-                                            .labelMedium,
-                                            ),
-                                            
+                                      border: InputBorder.none,
+                                      labelText: 'Enter a pin code',
+                                      labelStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                      hintStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                    ),
                                   )),
                               Container(
                                 width: 500,
