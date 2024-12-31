@@ -15,7 +15,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
         appBar: AppBar(
           title: Text(
             'Subscription History',
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(color: Colors.white),
           ),
           backgroundColor: AppColors.redBackground,
         ),
@@ -90,10 +93,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Yes',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.secondaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -127,10 +130,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Yes',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.green),
                     ),
                   ],
                 ),
@@ -166,10 +169,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Yes',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.secondaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -203,10 +206,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Yes',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.green),
                     ),
                   ],
                 ),
@@ -242,10 +245,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Yes',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.secondaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -279,10 +282,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Yes',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.green),
                     ),
                   ],
                 ),
@@ -355,10 +358,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Pause',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.redBackground),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.red),
                       ),
                     ],
                   ),
@@ -392,10 +395,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Pause',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.redBackground),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.red),
                     ),
                   ],
                 ),
@@ -431,10 +434,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Resume',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.secondaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -468,10 +471,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Resume',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.green),
                     ),
                   ],
                 ),
@@ -507,10 +510,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                       ),
                       Text(
                         'Resume',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.secondaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -544,10 +547,10 @@ class _SubscriptionHistorysState extends State<SubscriptionHistorys> {
                     ),
                     Text(
                       'Resume',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.secondaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: Colors.green),
                     ),
                   ],
                 ),
