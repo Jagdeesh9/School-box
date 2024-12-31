@@ -72,25 +72,27 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
 
-          //suscription ro
+          //suscription row
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Subscription',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(
-                      "Explore through the popular subscriptions",
-                      style: Theme.of(context).textTheme.labelLarge,
-                    )
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Subscription',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      Text(
+                        "Explore through the popular subscriptions",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      )
+                    ],
+                  ),
                 ),
                 OutlinedButton(
                   onPressed: () {},
