@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:school_box/pages/bottomNavi.dart';
+import 'package:school_box/pages/Screens/signupform.dart';
 import 'package:school_box/widgets/textfield.dart';
 import 'package:school_box/widgets/themeButton.dart';
 
+// ignore: must_be_immutable
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key});
+  String mobile;
+  OtpPage({super.key, required this.mobile});
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -13,32 +16,71 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   TextEditingController _otpController = TextEditingController();
 
-  void hanldleOtpVerification() {
-    print(_otpController);
-    if (_otpController.text.length == 4) {
+  Future<void> hanldleOtpVerification() async {
+    print(widget.mobile); //403861
+    try {
+      // Make the API call
+      Response response = await Dio().post(
+        'https://schoolbox.ilikasofttech.com/api/verify_phone_otp',
+        data: {
+          'phone': widget.mobile, // Replace with actual phone number
+          'device_token':
+              'daefsrgdthyftdgvs', // Replace with actual device token
+          'type': 'customer',
+          'query_type': 'signup',
+          'otp': _otpController.text, // Use OTP from the controller
+        },
+      );
+
+      // Log the response for debugging
+      print("Response: ${response.data}");
+
+      // Check if the response status is successful
+      if (response.data['status'] == '200') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Text("${response.data['message']}"),
+          ),
+        );
+
+        // Navigate to the next page or perform further actions
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Signupform(mobile: widget.mobile),
+          ), // Replace `NextPage` with your desired page
+        );
+      } else {
+        // Handle API errors with custom messages
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              response.data['message'] ??
+                  "OTP verification failed. Please try again.",
+            ),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      // Handle Dio-specific errors
+      print("Dio Error: ${e.response?.data}");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           backgroundColor: Colors.red,
           content: Text(
-            "Verification Successful",
-            style: TextStyle(color: Colors.white),
+            e.response?.data['message'] ?? "Network error. Please try again.",
           ),
         ),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Bottomnavi(),
-        ),
-      );
-    } else {
+    } catch (e) {
+      // Handle unexpected errors
+      print("Unexpected Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
-          content: Text(
-            "Please enter a valid 4-digit code.",
-            style: TextStyle(color: Colors.white),
-          ),
+          content: Text("An unexpected error occurred. Please try again."),
         ),
       );
     }

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:school_box/constants/colors.dart';
 
-class Subscription_Detail extends StatefulWidget {
-  const Subscription_Detail({super.key});
+class Subscription_Detail extends StatelessWidget {
+  final String title;
+  final String image;
+  final String description;
+  // ignore: non_constant_identifier_names
+  final String finalprice;
+  final String cost;
+  const Subscription_Detail(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.description,
+      required this.finalprice,
+      required this.cost});
 
-  @override
-  State<Subscription_Detail> createState() => _Subscription_DetailState();
-}
-
-// ignore: camel_case_types
-class _Subscription_DetailState extends State<Subscription_Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +34,9 @@ class _Subscription_DetailState extends State<Subscription_Detail> {
                 padding: const EdgeInsets.all(20),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/slide-1.jpg',
-                    width: 400,
+                  child: Image.network(
+                    image,
+                    width: double.infinity,
                     height: 200,
                     fit: BoxFit.cover,
                   ),
@@ -40,74 +46,65 @@ class _Subscription_DetailState extends State<Subscription_Detail> {
                 children: [
                   Row(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              'Daily Mix Veg Food \nSubscription',
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            ),
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 5),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              'Mix veg, Chapatis, 1 mithai, 4 Bananas, Mix \n veg, Chapatis, 1 mithai, 4 Bananas',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       const SizedBox(
                         width: 5,
                       ),
-                      Container(
-                        // margin: EdgeInsets.only(top: 20),
-                        width: 1,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            // ignore: deprecated_member_use
-                            color: AppColors.textSecondary.withOpacity(0.5)),
-                      ),
                       const SizedBox(
                         width: 5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: AppColors.secondaryColor,
-                                borderRadius: BorderRadius.circular(25),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Column(
+                            children: [
+                              Container(
+                                // width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: AppColors.secondaryColor,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: const Icon(
+                                  Icons.currency_rupee_rounded,
+                                  color: AppColors.textWhite,
+                                ),
                               ),
-                              child: const Icon(
-                                Icons.currency_rupee_rounded,
-                                color: AppColors.textWhite,
+                              Text(
+                                finalprice,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.primaryColor,
+                                ),
                               ),
-                            ),
-                            const Text(
-                              '2000',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              '2500',
-                              style: TextStyle(
-                                fontSize: 16,
-                                // decoration: TextDecoration.lineThrough,
-                                color: AppColors.secondaryColor,
-                              ),
-                            ),
-                          ],
+                              const SizedBox(width: 8),
+                              // Text(
+                              //   cost,
+                              //   style: const TextStyle(
+                              //     fontSize: 16,
+                              //     // decoration: TextDecoration.lineThrough,
+                              //     color: AppColors.secondaryColor,
+                              //   ),
+                              // ),
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -138,7 +135,7 @@ class _Subscription_DetailState extends State<Subscription_Detail> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur..',
+                  description,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),

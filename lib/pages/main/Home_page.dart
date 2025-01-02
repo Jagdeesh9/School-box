@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:school_box/colors.dart';
@@ -14,12 +15,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<dynamic> _subscription = [];
+  List<dynamic> _banners = [];
+
+  // Function to fetch banners
+  Future<void> getSubscriptions() async {
+    try {
+      Response response =
+          await Dio().get('https://schoolbox.ilikasofttech.com/api/home');
+
+      setState(() {
+        _subscription = response.data['data']['subscriptions'];
+        _banners = response.data['data']['banners'];
+      });
+
+      print('banners -----------------------------> $_banners');
+    } catch (e) {
+      print('Error fetching banners: $e');
+    }
+  }
+
   void hello() {
     print('hello');
   }
 
   @override
   void initState() {
+    getSubscriptions();
     super.initState();
   }
 
@@ -65,7 +87,9 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           //carousle
-          CarouselExample(),
+          CarouselExample(
+            banners: _banners,
+          ),
 
           //sizedbox
           const SizedBox(
@@ -112,11 +136,17 @@ class _HomePageState extends State<HomePage> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 // Use if the ListView is inside another scrollable widget
-                itemCount: 6, // Number of Foodrow widgets
+                itemCount: _subscription.length, // Number of Foodrow widgets
                 itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Foodrow(),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Foodrow(
+                      title: _subscription[index]['title'],
+                      description: _subscription[index]['description'],
+                      finalprice: _subscription[index]['final_cost'],
+                      cost: _subscription[index]['cost'],
+                      image: _subscription[index]['subscription_image'],
+                    ),
                   );
                 },
               ),
@@ -129,21 +159,25 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Foodrow extends StatelessWidget {
+  final String title;
+  final String image;
+  final String description;
+  // ignore: non_constant_identifier_names
+  final String finalprice;
+  final String cost;
   const Foodrow({
     super.key,
+    required this.title,
+    required this.description,
+    required this.finalprice,
+    required this.image,
+    required this.cost,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const Subscription_Detail(),
-        //   ),
-        // );
-
         showBottomSheet(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -158,7 +192,7 @@ class Foodrow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: double.infinity,
+                      width: 150,
                       height: 150, // Adjust height as needed
                       decoration: BoxDecoration(
                         color: AppColors.black,
@@ -180,9 +214,11 @@ class Foodrow extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius:
                             BorderRadius.circular(12.0), // Match the curve
-                        child: Image.asset(
-                          'assets/images/slide-1.jpg',
-                          fit: BoxFit.cover,
+                        child: Center(
+                          child: Image.network(
+                            image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -206,8 +242,13 @@ class Foodrow extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const Subscription_Detail(),
+                                builder: (context) => Subscription_Detail(
+                                  title: title,
+                                  description: description,
+                                  finalprice: finalprice,
+                                  cost: cost,
+                                  image: image,
+                                ),
                               ),
                             );
                           },
@@ -242,8 +283,8 @@ class Foodrow extends StatelessWidget {
                 ),
                 height: 80,
                 width: 80,
-                child: Image.asset(
-                  'assets/images/slide-1.jpg',
+                child: Image.network(
+                  image,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -260,14 +301,15 @@ class Foodrow extends StatelessWidget {
                   children: [
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "Daily mix veg food subscription",
+                      title,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Text(
-                      'Mix Veg, Chapati, Mithai, 4 Bananas, Mix Veg, Chapati, Mithai, 4 Bananas ',
+                      overflow: TextOverflow.ellipsis,
+                      description,
                       style: Theme.of(context).textTheme.labelLarge,
                     )
                   ],
@@ -306,14 +348,15 @@ class Foodrow extends StatelessWidget {
                       height: 2,
                     ),
 
-                    const Text(
-                      '2000',
-                      style: TextStyle(color: AppColors.warning, fontSize: 12),
+                    Text(
+                      finalprice,
+                      style: const TextStyle(
+                          color: AppColors.warning, fontSize: 12),
                     ),
 
-                    const Text(
-                      '2500',
-                      style: TextStyle(
+                    Text(
+                      cost,
+                      style: const TextStyle(
                           fontSize: 12,
                           decorationColor: AppColors.darkGrey,
                           color: AppColors.darkGrey,

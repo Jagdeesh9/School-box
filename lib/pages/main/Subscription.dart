@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_box/common/utils/helpers.dart';
 import 'package:school_box/constants/colors.dart';
 
 class Subscription extends StatefulWidget {
@@ -19,13 +20,8 @@ class _SubscriptionState extends State<Subscription> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(
-            'My Subscriptions ',
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(color: Colors.white),
-          ),
+          child: Text('My Subscriptions ',
+              style: Theme.of(context).textTheme.headlineSmall),
         ),
         backgroundColor: AppColors.redBackground,
       ),
@@ -36,27 +32,27 @@ class _SubscriptionState extends State<Subscription> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  color: Colors.white,
+                  color: Helpers.isDarkMode(context)
+                      ? AppColors.black
+                      : AppColors.textWhite,
                   elevation: 4,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text('Daily Mix Veg Subscription',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(fontWeight: FontWeight.bold)),
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text(
+                          'Daily Mix Veg Subscription',
+                        ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Container(
                         width: double.infinity,
                         height: 2,
                         color: Colors.black.withOpacity(0.3),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 8.0),
@@ -155,29 +151,30 @@ class _SubscriptionState extends State<Subscription> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Container(
                         width: double.infinity,
                         height: 2,
+                        // ignore: deprecated_member_use
                         color: Colors.black.withOpacity(0.3),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(width: 150),
+                            const SizedBox(width: 150),
                             ElevatedButton(
                               onPressed: () {
                                 // Handle pause button press
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.light,
-                                side:
-                                    BorderSide(color: AppColors.redBackground),
+                                side: const BorderSide(
+                                    color: AppColors.redBackground),
                               ),
-                              child: Text('View',
+                              child: const Text('View',
                                   style: TextStyle(
                                       color: AppColors.redBackground)),
                             ),
@@ -186,9 +183,10 @@ class _SubscriptionState extends State<Subscription> {
                                 _showPauseSheet(context);
                               },
                               style: ElevatedButton.styleFrom(
-                                side: BorderSide(color: AppColors.textPrimary),
+                                side: const BorderSide(
+                                    color: AppColors.textPrimary),
                               ),
-                              child: Text('Pause'),
+                              child: const Text('Pause'),
                             ),
                           ],
                         ),
@@ -200,7 +198,9 @@ class _SubscriptionState extends State<Subscription> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  color: Colors.white,
+                  color: Helpers.isDarkMode(context)
+                      ? AppColors.black
+                      : AppColors.textWhite,
                   elevation: 4,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -214,13 +214,14 @@ class _SubscriptionState extends State<Subscription> {
                                 .headlineSmall
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Container(
                         width: double.infinity,
                         height: 2,
+                        // ignore: deprecated_member_use
                         color: Colors.black.withOpacity(0.3),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 8.0),
@@ -319,44 +320,36 @@ class _SubscriptionState extends State<Subscription> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Container(
                         width: double.infinity,
                         height: 2,
+                        // ignore: deprecated_member_use
                         color: Colors.black.withOpacity(0.3),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(width: 150),
-                            ElevatedButton(
+                            OutlinedButton(
                               onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.light,
-                                side:
-                                    BorderSide(color: AppColors.redBackground),
-                              ),
-                              child: Text('View',
-                                  style: TextStyle(
-                                      color: AppColors.redBackground)),
+                              child: const Text("view"),
                             ),
-                            Container(
-                              // margin: EdgeInsets.all(8.0),
-                              // padding: EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  _showResumeSheet(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.secondaryColor,
-                                  side:
-                                      BorderSide(color: AppColors.textPrimary),
-                                ),
-                                child: Text('Resume'),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                _showResumeSheet(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.secondaryColor,
+                                side: const BorderSide(
+                                    color: AppColors.textPrimary),
                               ),
+                              child: const Text('Resume'),
                             ),
                           ],
                         ),
@@ -375,7 +368,7 @@ class _SubscriptionState extends State<Subscription> {
   void _showPauseSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
@@ -385,63 +378,44 @@ class _SubscriptionState extends State<Subscription> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Pause Subscription',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
+                const SizedBox(height: 16),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'From',
+                    hintText: 'dd/mm/yyyy',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Up To',
+                    hintText: 'dd/mm/yyyy',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 Container(
+                  // margin: EdgeInsets.all(10),
                   width: double.infinity,
-                  height: 2,
-                  // margin: EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    // borderRadius: BorderRadius.circular(2),
+
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(25)),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle pause subscription logic
+                    },
+                    child: const Text('Pause Now'),
                   ),
                 ),
-                SizedBox(height: 16),
-                Card(
-                  elevation: 3.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'From',
-                      hintText: 'dd/mm/yyyy',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                Card(
-                  elevation: 3.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Up To',
-                      hintText: 'dd/mm/yyyy',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                // SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    // margin: EdgeInsets.all(10),
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: AppColors.redBackground,
-                        borderRadius: BorderRadius.circular(25)),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Handle pause subscription logic
-                      },
-                      child: Text('Pause Now'),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Center(
                   child: Text(
                     'Terms & Conditions',
@@ -463,7 +437,7 @@ class _SubscriptionState extends State<Subscription> {
   void _showResumeSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
@@ -473,51 +447,38 @@ class _SubscriptionState extends State<Subscription> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Resume Subscription',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
+                const SizedBox(height: 16),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Paused From',
+                    hintText: '01/1/2025',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
+                  // margin: EdgeInsets.all(10),
                   width: double.infinity,
-                  height: 2,
-                  // margin: EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    // borderRadius: BorderRadius.circular(2),
+
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(25)),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle pause subscription logic
+                    },
+                    child: const Text('Resume Now'),
                   ),
                 ),
-                SizedBox(height: 16),
-                Card(
-                  elevation: 3.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Paused From',
-                      hintText: '01/1/2025',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    // margin: EdgeInsets.all(10),
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: AppColors.redBackground,
-                        borderRadius: BorderRadius.circular(25)),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Handle pause subscription logic
-                      },
-                      child: Text('Resume Now'),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Center(
                   child: Text(
                     'Terms & Conditions',

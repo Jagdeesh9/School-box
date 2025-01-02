@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:school_box/pages/bottomNavi.dart';
+import 'package:school_box/pages/Singup_page.dart';
+// import 'package:school_box/pages/Singup_page.dart';
+import 'package:school_box/pages/main/Home_page.dart';
+// import 'package:school_box/pages/bottomNavi.dart';
 import 'package:school_box/theme/theme.dart';
 
 void main() {
@@ -24,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const Bottomnavi(),
+      home: const SignupPage(),
     );
   }
 }
