@@ -1,8 +1,11 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:school_box/pages/Otp_Page.dart';
+import 'package:school_box/pages/login.dart';
+import 'package:school_box/pages/main/Home_page.dart';
 import 'package:school_box/widgets/textfield.dart';
 import 'package:school_box/widgets/themeButton.dart';
+import 'package:dio/dio.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -15,31 +18,38 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController mobileNumberController = TextEditingController();
   bool _isChecked = false;
 
-  void sendOtpHandler() {
+  Future<void> sendOtpHandler() async {
     if (_isChecked) {
+      Response response = await Dio().post(
+        'https://schoolbox.ilikasofttech.com/api/check_ph_send_otp',
+        data: {
+          'phone': mobileNumberController.text,
+          'device_token': 'daefsrgdthyftdgvs',
+          'type': 'customer',
+          'query_type': 'signup',
+        },
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text("${response.data['message']}"),
+        ),
+      );
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const OtpPage(),
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            "A verification code has been sent to your number",
-            // style: TextStyle(color: Colors.white),
-          ),
+          builder: (context) {
+            return OtpPage(mobile: mobileNumberController.text);
+          },
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
-          content: Text(
-            "Please agree to the terms before proceeding.",
-            style: TextStyle(color: Colors.white),
-          ),
+          content: Text("accept terms and condition first"),
         ),
       );
     }
@@ -116,16 +126,21 @@ class _SignupPageState extends State<SignupPage> {
                   children: [
                     InkWell(
                       onTap: () {
-                        // Navigate to Login Screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ),
+                        );
                       },
-                      child: const Text(
+                      child: Text(
                         'Already have an account? Login',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          decoration: TextDecoration.underline,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge
+                            ?.copyWith(decoration: TextDecoration.underline)
+                            .copyWith(decorationColor: getBorderColor(context)),
                       ),
                     ),
                   ],
